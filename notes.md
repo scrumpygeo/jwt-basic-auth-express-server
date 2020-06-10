@@ -63,3 +63,35 @@ Now run server with `node index.js` and it works
 ===
 
 # II. AUTHENTICATION
+
+Connection to DB.
+Mongoose (= an ORM) = library sitting btween us and mongodb.
+
+i. create user model with mongoose
+
+- this model will represent a user.
+  - has 2 attribs, email and pwd.
+
+1. create new folder called models
+   and in it user.js for the user model
+
+Schema tells mongoose about the fields our model will have.
+
+We will do this inside our user model:
+
+      - Define our model
+      - Create the model class
+      - Export the model
+
+Here, String ins the Javascript String so we don't need to import anything
+
+```
+const userSchema = new Schema({
+  email: String,
+  password: String,
+});
+
+```
+
+to make sure username is unique we declare it like so: email: { type: String, unique: true, lowercase: true },
+Mongodb does not enforce case check when doing unique check; ie it treats same email address, one lwr case and 1 in caps as different. So we need to add lowercase: true
