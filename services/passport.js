@@ -7,7 +7,7 @@ const LocalStrategy = require('passport-local');
 
 // Create local strategy +++++++++++++++++++++++++++++++++++++++
 // default expects username but we are using email so we need to tell it so (it expects password so no need to do anything else):
-const localOptions = { usenameField: 'email' };
+const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, function (
   email,
   password,
@@ -23,6 +23,16 @@ const localLogin = new LocalStrategy(localOptions, function (
     }
 
     // now compare pwds
+    user.comparePassword(password, function (err, isMatch) {
+      if (err) {
+        return done(err);
+      }
+      if (!isMatch) {
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
   });
 });
 
@@ -50,6 +60,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     }
   });
 });
-
-// Tell passport to use this strategy
+// Tell passport to use the strategies (there are 2):
 passport.use(jwtLogin);
+passport.use(localLogin);
