@@ -129,3 +129,5 @@ app.post('/signup', Authentication.signup);
 ```
 
 req.body: .body refers to anything contained in the post request
+
+4. Encrypt pwds with bcrypt
