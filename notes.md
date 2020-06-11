@@ -95,3 +95,37 @@ const userSchema = new Schema({
 
 to make sure username is unique we declare it like so: email: { type: String, unique: true, lowercase: true },
 Mongodb does not enforce case check when doing unique check; ie it treats same email address, one lwr case and 1 in caps as different. So we need to add lowercase: true
+
+then export it.
+
+2. MongoDB Setup
+
+- set it up outside. Run it with mongod command
+
+Now write setup code in index.js to connect to mongodb:
+require('mongoose') and look ad DB Setup section in index.js
+
+```
+// DB Setup
+mongoose.connect('mongodb://localhost:auth/auth', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+```
+
+If u get any probs running mongod, make sure you are running it from cmd with admin rights.
+
+3. Create user
+
+i. in router, remove the test route we had and use this:
+app.post('/signup', Authentication.signup);
+
+```
+  ii. authentication.js: do these 4 steps:
+     - see if user exists
+       - if user exists, return error
+       - if user doesnt exist, create and save user record.
+       - respond to request informing user was created
+```
+
+req.body: .body refers to anything contained in the post request
