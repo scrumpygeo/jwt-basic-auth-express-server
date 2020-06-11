@@ -4,7 +4,7 @@
 
     - hit enter to everything.
 
-2.  npm i --save express mongoose morgan body-parser
+2.  **npm i --save express mongoose morgan body-parser**
 3.  create index.js
 
 4.  `$ node index.js // to try run server when we got code.`
@@ -29,7 +29,7 @@ Now run server with `node index.js` and it works
    morgan is a logging framework = good for debugging
    bodyParser parses incoming requests into json regardless of request type.
 
-10. npm i --save nodemon
+10. **npm i --save nodemon**
     nodemon watches our file dir for any change. Any changes and it restarts server.
     to do this add script to package.json
     "dev": "nodemon index.js"
@@ -131,3 +131,36 @@ app.post('/signup', Authentication.signup);
 req.body: .body refers to anything contained in the post request
 
 4. Encrypt pwds with bcrypt
+
+**npm i --save bcrypt-nodejs**
+
+then in user.js to implement
+
+5. Creating a jwt
+
+**npm i --save jwt-simple**
+
+We need to keep our secret string secret, so don't post to github.
+
+create config.js file and put random sequence in it. then add file to .gitignore.
+
+Then use jwt in authentication.js
+
+jwt has a sub property = subject, ie who this token is about.
+so we use sub: user.id we use the user id (not email address ashe might change this)
+
+iat: issued at time
+
+User currently gets token when he signs up. We now need to do these tasks
+
+1. let user get token when he logs in
+
+2. verify user authenticated when he tries to go to a protected resource
+
+We use **Passport**
+
+- an authentication library for node and express. Usually used for cookie-based authentication so we will use it slightly differently that for cookies.
+
+**npm i passport passport-jwt**
+
+make new folder and file to host out passport config: **services/passport.js**
