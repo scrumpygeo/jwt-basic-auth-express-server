@@ -166,3 +166,10 @@ We use **Passport**
 make new folder and file to host out passport config: **services/passport.js**
 
 Passport will help us authenticate a user when they visit a route.
+
+goto router.js
+
+3. We have signup. Now we want to implement sign in. For this we use another passport strategy.
+   This will be with a local strategy, meaning with data stored locally, ie email and pwd.
+
+**npm i --save passport-local**
